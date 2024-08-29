@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Floor Selector</title>
+<style>
+  body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('floor.jpg') no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  .back-button {
+    position: fixed;
+    top: 60px;
+    left: 40px;
+    padding: 5px 10px;
+    background: transparent;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    outline: none;
+    transition: color 0.3s, box-shadow 0.3s;
+  }
+
+  .back-button:hover {
+    color: #ccc;
+    box-shadow: none;
+  }
+
+  .back-button:before {
+    content: "\2190";
+    margin-right: 5px;
+  }
+
+  .floor-selector {
+    height: 100%;
+    width: 12%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: rgba(17, 17, 17, 0.8);
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    box-sizing: border-box;
+  }
+
+  .floor-selector a {
+    width: 60%;
+    padding: 5px 6px;
+    margin: 6px 0;
+    text-decoration: none;
+    font-size: 14px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333;
+    transition: background-color 0.3s;
+    border: 2px solid white;
+    border-radius: 10px;
+    position: relative;
+  }
+
+  .floor-selector a:hover {
+    background-color: #575757;
+  }
+
+  #display {
+    position: fixed;
+    left: 50px;
+    font-size: 14px;
+    color: white;
+    padding: 5px;
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 5px;
+    display: none;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="back-button">Zurück</div>
+
+<div class="floor-selector">
+  <a href="javascript:void(0)" onclick="showFloor(0, this)">0</a>
+  <a href="javascript:void(0)" onclick="showFloor(1, this)">1</a>
+  <a href="javascript:void(0)" onclick="showFloor(2, this)">2</a>
+  <a href="javascript:void(0)" onclick="showFloor(3, this)">3</a>
+  <a href="javascript:void(0)" onclick="showFloor(4, this)">4</a>
+  <a href="javascript:void(0)" onclick="showFloor(5, this)">5</a>
+  <a href="javascript:void(0)" onclick="showFloor(6, this)">6</a>
+  <a href="javascript:void(0)" onclick="showFloor(7, this)">7</a>
+  <a href="javascript:void(0)" onclick="showFloor(8, this)">8</a>
+  <a href="javascript:void(0)" onclick="showFloor(9, this)">9</a>
+  <a href="javascript:void(0)" onclick="showFloor(10, this)">10</a>
+</div>
+
+<div id="display"></div>
+
+<script>
+function showFloor(floor, element) {
+  var display = document.getElementById('display');
+  var rect = element.getBoundingClientRect();
+
+  display.style.top = (rect.top + element.offsetHeight - 25) + 'px';
+  display.style.left = (rect.left + element.offsetWidth - 350) + 'px';
+  
+  display.innerHTML = 'You have arrived at floor ' + floor;
+  display.style.display = 'block';
+
+  setTimeout(function() {
+    display.style.display = 'none';
+  }, 2000);
+}
+
+</script>
+
+</body>
+</html>
