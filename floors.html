@@ -13,9 +13,23 @@
     background-size: cover;
   }
 
+  .logo-container {
+    position: fixed;
+    top: 20px;
+    left: 40px;
+    width: 450px;
+    height: auto;
+  }
+
+  .logo-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
   .back-button {
     position: fixed;
-    top: 60px;
+    top: 90px;
     left: 40px;
     padding: 5px 10px;
     background: transparent;
@@ -48,17 +62,40 @@
     background-color: rgba(17, 17, 17, 0.8);
     overflow-x: hidden;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
     padding: 20px 0;
     box-sizing: border-box;
+  }
+
+  .logout-button {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 10px;
+  }
+
+  .menu-button {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+  }
+
+  .logout-button img {
+    width: 24px;
+    height: auto;
+  }
+
+  .menu-button img {
+    width: 65px;
+    height: auto;
   }
 
   .floor-selector a {
     width: 60%;
     padding: 5px 6px;
-    margin: 6px 0;
+    margin-bottom: 10px;
     text-decoration: none;
     font-size: 14px;
     color: white;
@@ -87,24 +124,46 @@
     display: none;
   }
 
+  .wir-button {
+    width: 80px;
+    height: 40px;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 30px;
+    border: 2px solid white;
+    border-radius: 10px;
+    color: white;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .heart {
+    color: white;
+    margin-left: 5px;
+    font-size: 14px;
+  }
+
+  .wir-button p {
+    margin: 0;
+  }
+
 </style>
 </head>
 <body>
 
+<div class="logo-container">
+  <img src="ntt-logo-cxp.svg" alt="NTT Logo">
+</div>
+
 <div class="back-button">Zurück</div>
 
-<div class="floor-selector">
-  <a href="javascript:void(0)" onclick="showFloor(0, this)">0</a>
-  <a href="javascript:void(0)" onclick="showFloor(1, this)">1</a>
-  <a href="javascript:void(0)" onclick="showFloor(2, this)">2</a>
-  <a href="javascript:void(0)" onclick="showFloor(3, this)">3</a>
-  <a href="javascript:void(0)" onclick="showFloor(4, this)">4</a>
-  <a href="javascript:void(0)" onclick="showFloor(5, this)">5</a>
-  <a href="javascript:void(0)" onclick="showFloor(6, this)">6</a>
-  <a href="javascript:void(0)" onclick="showFloor(7, this)">7</a>
-  <a href="javascript:void(0)" onclick="showFloor(8, this)">8</a>
-  <a href="javascript:void(0)" onclick="showFloor(9, this)">9</a>
-  <a href="javascript:void(0)" onclick="showFloor(10, this)">10</a>
+<div class="floor-selector" id="floorSelector">
+  <div class="logout-button">
+    <img src="logout.svg" alt="Logout">
+  </div>
 </div>
 
 <div id="display"></div>
@@ -124,6 +183,27 @@ function showFloor(floor, element) {
     display.style.display = 'none';
   }, 2000);
 }
+
+function createFloorLinks(totalFloors) {
+  const selector = document.getElementById('floorSelector');
+  for (let i = totalFloors; i >= 0; i--) {
+    let floorLink = document.createElement('a');
+    floorLink.href = 'javascript:void(0)';
+    floorLink.innerText = i;
+    floorLink.onclick = function() { showFloor(i, this); };
+    selector.appendChild(floorLink);
+  }
+  const menuButton = document.createElement('div');
+  menuButton.className = 'menu-button';
+  menuButton.innerHTML = '<img src="meniu_button_acces_card.svg" alt="Menu Access Card">';
+  selector.appendChild(menuButton);
+
+  const wirButton = document.createElement('div');
+  wirButton.className = 'wir-button';
+  wirButton.innerHTML = '<p>Wir<span class="heart">&#x2665;</span></p><p>NTTDATA</p>';
+  selector.appendChild(wirButton);
+}
+createFloorLinks(10);
 
 </script>
 
